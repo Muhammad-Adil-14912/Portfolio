@@ -131,16 +131,25 @@ app.get('*', (req, res) => {
 });
 
 // Initialize DB and Listen
-db.connectDB()
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`=======================================================`);
-      console.log(` Adil Full-Stack Backend Server is running!`);
-      console.log(` Local Server:   http://localhost:${PORT}`);
-      console.log(`=======================================================`);
+if (!process.env.VERCEL) {
+  db.connectDB()
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(`=======================================================`);
+        console.log(` Adil Full-Stack Backend Server is running!`);
+        console.log(` Local Server:   http://localhost:${PORT}`);
+        console.log(`=======================================================`);
+      });
+    })
+    .catch(err => {
+      console.error('Server failed to start because database initialization failed:', err);
+      process.exit(1);
     });
-  })
-  .catch(err => {
-    console.error('Server failed to start because database initialization failed:', err);
-    process.exit(1);
+} else {
+  // In serverless environments (Vercel), connect asynchronously to warm up the connection
+  db.connectDB().catch(err => {
+    console.error('Serverless DB Conn Error during warmup:', err);
   });
+}
+
+module.exports = app;

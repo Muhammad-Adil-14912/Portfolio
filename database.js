@@ -13,6 +13,35 @@ let MessageModel, AnalyticsModel, ChatbotLogModel;
 function connectDB() {
   return new Promise((resolve, reject) => {
     if (useMongoDB) {
+      if (mongoose.connection.readyState >= 1) {
+        console.log('Using existing MongoDB connection.');
+        if (!MessageModel) {
+          const messageSchema = new mongoose.Schema({
+            name: { type: String, required: true },
+            email: { type: String, required: true },
+            subject: { type: String, required: true },
+            message: { type: String, required: true },
+            date: { type: String, default: () => new Date().toISOString() }
+          });
+          
+          const analyticsSchema = new mongoose.Schema({
+            type: { type: String, required: true },
+            timestamp: { type: String, default: () => new Date().toISOString() },
+            metadata: { type: String, default: '' }
+          });
+          
+          const chatbotSchema = new mongoose.Schema({
+            query: { type: String, required: true },
+            timestamp: { type: String, default: () => new Date().toISOString() }
+          });
+
+          MessageModel = mongoose.models.Message || mongoose.model('Message', messageSchema);
+          AnalyticsModel = mongoose.models.Analytics || mongoose.model('Analytics', analyticsSchema);
+          ChatbotLogModel = mongoose.models.ChatbotLog || mongoose.model('ChatbotLog', chatbotSchema);
+        }
+        resolve(true);
+        return;
+      }
       console.log('Connecting to MongoDB Atlas...');
       mongoose.connect(process.env.MONGODB_URI)
         .then(() => {
