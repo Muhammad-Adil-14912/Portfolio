@@ -773,7 +773,7 @@ function initChatbot() {
   const closeIcon = document.getElementById('toggleCloseIcon');
 
   const responses = {
-    'who is muhammad adil?': '<p><strong>Muhammad Adil</strong> is a B.Tech Computer Science student (3rd Year, 2023-2027) at Integral University, Lucknow.</p><p>He is a full-stack developer with 8.9 CGPA and an IBM Data Science certified practitioner who builds scalable MERN stack web apps.</p>',
+    'who is muhammad adil?': '<p><strong>Muhammad Adil</strong> is a B.Tech Computer Science student (3rd Year, 2023-2027) at Integral University, Lucknow.</p><p>He is a full-stack developer with 9.0 CGPA and an IBM Data Science certified practitioner who builds scalable MERN stack web apps.</p>',
     'show mern projects': '<p>Adil has built several key MERN applications:</p><ul><li><strong>Online Tiffin Service</strong>: An end-to-end food delivery service with Stripe and role dashboards.</li><li><strong>EcoVerse</strong>: A gamified climate app utilizing client databases and AI audits.</li></ul>',
     'show ai projects': '<p>Adil is highly interested in AI integrations:</p><ul><li><strong>EcoTrack AI</strong>: A carbon footprint modeling app utilizing Scikit-learn predictive algorithms.</li><li><strong>EcoVerse AI features</strong>: Image scanning recycling classifications running on the Google Gemini API.</li></ul>',
     'show certifications': '<p>Adil holds multiple certifications:</p><ul><li><strong>Data Science with Python by IBM</strong> (Verified)</li><li><strong>Full Stack Development Intern at Cognifyz Technologies</strong></li><li><strong>Full Stack Web Development</strong> (MERN stack)</li></ul>',
