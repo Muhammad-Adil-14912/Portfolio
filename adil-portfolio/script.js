@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initConsoleTabs(); // Refined dashboard tab switcher
   initGitHubIntegration();
   initCaseStudies();
-  initVideoModal();
   initChatbot();
   initTestimonials();
   initBlogFilter();
@@ -718,49 +717,6 @@ function initCaseStudies() {
   }
 }
 
-// ── 6. Project Demo Videos Modal ─────────────────────────
-function initVideoModal() {
-  const modalOverlay = document.getElementById('videoModalOverlay');
-  const closeBtn = document.getElementById('videoCloseBtn');
-  const videoIframe = document.getElementById('videoIframe');
-  const watchButtons = document.querySelectorAll('.watch-demo-btn');
-  
-  const videos = {
-    'tiffin-demo': 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    'ecoverse-demo': 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    'ecotrack-demo': 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    'todoapp-demo': 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    'cybersecurity-demo': 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    'weather-demo': 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    'portfolio-demo': 'https://www.youtube.com/embed/dQw4w9WgXcQ'
-  };
-
-  watchButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const vidId = btn.getAttribute('data-video-id');
-      const url = videos[vidId];
-      if (videoIframe && url) {
-        videoIframe.src = url;
-        modalOverlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
-    });
-  });
-
-  const closeVideo = () => {
-    modalOverlay.classList.remove('open');
-    if (videoIframe) videoIframe.src = '';
-    document.body.style.overflow = '';
-  };
-
-  if (closeBtn) closeBtn.addEventListener('click', closeVideo);
-  if (modalOverlay) {
-    modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) closeVideo();
-    });
-  }
-}
-
 // ── 7. AI Assistant Chatbot (AdilGPT) ────────────────────
 function initChatbot() {
   const widget = document.getElementById('chatbotWidget');
@@ -1002,7 +958,7 @@ function initCommandPalette() {
     switch (action) {
       case 'go-home': document.getElementById('home')?.scrollIntoView(); break;
       case 'go-about': document.getElementById('about')?.scrollIntoView(); break;
-      case 'go-services': document.getElementById('services')?.scrollIntoView(); break;
+      case 'go-skills': document.getElementById('skills')?.scrollIntoView(); break;
       case 'go-timeline': document.getElementById('timeline')?.scrollIntoView(); break;
       case 'go-console': document.getElementById('dev-console')?.scrollIntoView(); break;
       case 'go-projects': document.getElementById('projects')?.scrollIntoView(); break;
@@ -1032,7 +988,7 @@ function initSearchModal() {
   const searchableIndex = [
     { type: 'Section', name: 'Home Section', keywords: 'home hero greeting welcome main introduction', action: () => document.getElementById('home').scrollIntoView() },
     { type: 'Section', name: 'About Me', keywords: 'about study student education integral background', action: () => document.getElementById('about').scrollIntoView() },
-    { type: 'Section', name: 'Services Offered', keywords: 'services design development apps logos custom software', action: () => document.getElementById('services').scrollIntoView() },
+    { type: 'Section', name: 'Skills & Expertise', keywords: 'skills frontend backend database design development custom software', action: () => document.getElementById('skills').scrollIntoView() },
     { type: 'Section', name: 'Journey Timeline', keywords: 'timeline history experience job internship archive achivements', action: () => document.getElementById('timeline').scrollIntoView() },
     { type: 'Section', name: 'Developer Console', keywords: 'console skills stack languages react node python db coding analytics traffic metrics', action: () => document.getElementById('dev-console').scrollIntoView() },
     { type: 'Section', name: 'Projects / Selected Work', keywords: 'projects portfolio cases codes links tiffin ecoverse ecotrack todoapp cybersecurity weather demo', action: () => document.getElementById('projects').scrollIntoView() },
