@@ -639,7 +639,13 @@ body:has(.clickable:hover) .cursor-follower {
   transition: all 0.25s;
   cursor: none;
 }
-.btn-outline i { width: 14px; height: 14px; }
+.btn-outline i,
+.btn-outline svg,
+.btn-outline svg.lucide {
+  width: 14px !important;
+  height: 14px !important;
+  flex-shrink: 0 !important;
+}
 .btn-outline:hover {
   border-color: var(--gold);
   color: var(--gold);
@@ -1741,6 +1747,7 @@ body:has(.clickable:hover) .cursor-follower {
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
+  margin-bottom: 1.5rem;
 }
 .social-btn {
   display: inline-flex;
@@ -1758,6 +1765,29 @@ body:has(.clickable:hover) .cursor-follower {
 .social-btn svg { flex-shrink: 0; transition: transform 0.25s; }
 .social-btn:hover { border-color: var(--gold); color: var(--gold); }
 .social-btn:hover svg { transform: scale(1.1); }
+
+.contact-resume-group {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+  clear: both;
+}
+.contact-resume-group .resume-btn {
+  padding: 0.65rem 1.3rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.contact-resume-group .resume-btn svg,
+.contact-resume-group .resume-btn svg.lucide,
+.contact-resume-group .resume-btn i {
+  width: 14px !important;
+  height: 14px !important;
+  flex-shrink: 0 !important;
+}
 
 /* Form inputs */
 .contact-form { display: flex; flex-direction: column; gap: 1.4rem; }
