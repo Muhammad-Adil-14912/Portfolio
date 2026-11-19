@@ -60,12 +60,11 @@ app.get('/api/analytics/stats', async (req, res) => {
   try {
     const stats = await db.getStats();
     
-    // Fallback: If stats are zero (e.g. database brand new), add some base-level mock values
-    // to keep the portfolio dashboard visual-rich, but layer the new real counts on top.
+    // Report only recorded database events; never inflate analytics with demo offsets.
     const responseStats = {
-      visitors: stats.visitors + 1200, // Offset to show baseline historic visitors
+      visitors: stats.visitors,
       messages: stats.messages,
-      cvDownloads: stats.cvDownloads + 320 // Offset for historic CV downloads
+      cvDownloads: stats.cvDownloads
     };
     
     res.status(200).json(responseStats);
@@ -93,12 +92,10 @@ app.get('/api/analytics/chart', async (req, res) => {
     // Merge real database records with the 7-day timeline
     const mergedData = last7Days.map(timelineDay => {
       const dbMatch = chartData.find(row => row.day === timelineDay.day);
-      // Give a small baseline of mock visitors (e.g. 100-200) plus the real logged hits
-      // to keep the visual line chart rich and moving.
-      const mockOffset = 150 + Math.floor(Math.sin(new Date(timelineDay.day).getDay()) * 40);
+      // Missing days are genuine zero-activity days, not synthetic traffic.
       return {
         label: new Date(timelineDay.day).toLocaleDateString('en-US', { weekday: 'short' }),
-        count: (dbMatch ? dbMatch.count : 0) + mockOffset
+        count: dbMatch ? dbMatch.count : 0
       };
     });
     
